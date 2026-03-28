@@ -1,16 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
+import AlertTicker from "@/components/dashboard/AlertTicker";
+import DashboardView from "@/components/dashboard/DashboardView";
+import IntelligenceView from "@/components/dashboard/IntelligenceView";
+import OptimizationView from "@/components/dashboard/OptimizationView";
+import ExecutionView from "@/components/dashboard/ExecutionView";
+import PlatformView from "@/components/dashboard/PlatformView";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const views: Record<string, React.FC> = {
+  Dashboard: DashboardView,
+  Intelligence: IntelligenceView,
+  Optimization: OptimizationView,
+  Execution: ExecutionView,
+  Platform: PlatformView,
+};
+
+const Index = () => {
+  const [activeTab, setActiveTab] = useState("Dashboard");
+  const ActiveView = views[activeTab] || DashboardView;
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="min-h-screen bg-background">
+      <DashboardHeader activeTab={activeTab} onTabChange={setActiveTab} />
+      <AlertTicker />
+      <main className="p-6 max-w-[1440px] mx-auto">
+        <ActiveView />
+      </main>
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
