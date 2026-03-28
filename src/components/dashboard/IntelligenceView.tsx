@@ -1,5 +1,7 @@
-import { Brain, TrendingUp, AlertTriangle, Target, LineChart, Layers, ArrowUpRight, ArrowDownRight } from "lucide-react";
+import { Brain, TrendingUp, AlertTriangle, Target, ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid, Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from "recharts";
+import { useQuery } from "@tanstack/react-query";
+import { fetchIntelAnomalies, fetchIntelMetrics, fetchIntelInsights } from "@/lib/api";
 
 const modelPerformance = [
   { month: "Jan", accuracy: 87, precision: 82, recall: 90 },
@@ -10,24 +12,20 @@ const modelPerformance = [
   { month: "Jun", accuracy: 94, precision: 92, recall: 94 },
 ];
 
-const radarData = [
-  { subject: "Cost Prediction", A: 92 },
-  { subject: "Anomaly Detection", A: 88 },
-  { subject: "Resource Sizing", A: 76 },
-  { subject: "Trend Analysis", A: 95 },
-  { subject: "Pattern Recognition", A: 84 },
-  { subject: "Forecasting", A: 90 },
-];
-
-const insights = [
-  { title: "Predicted 23% cost increase next month", confidence: "94%", impact: "high", trend: "up" },
-  { title: "Lambda cold starts correlate with cost spikes", confidence: "89%", impact: "medium", trend: "up" },
-  { title: "Weekend EC2 usage dropping — rightsizing opportunity", confidence: "91%", impact: "high", trend: "down" },
-  { title: "S3 lifecycle policies could save $420/mo", confidence: "87%", impact: "medium", trend: "down" },
-  { title: "RDS read replica underutilized in eu-west-1", confidence: "85%", impact: "low", trend: "down" },
-];
-
 const IntelligenceView = () => {
+  const { data: anomalies } = useQuery({ queryKey: ['intelAnomalies'], queryFn: fetchIntelAnomalies, refetchInterval: 60000 });
+  const { data: metrics } = useQuery({ queryKey: ['intelMetrics'], queryFn: fetchIntelMetrics, refetchInterval: 60000 });
+  const { data: insights } = useQuery({ queryKey: ['intelInsights'], queryFn: fetchIntelInsights, refetchInterval: 60000 });
+
+  const radarData = [
+    { subject: "Cost Prediction", A: insights?.radarScore || 80 },
+    { subject: "Anomaly Detection", A: insights?.radarScore ? insights.radarScore + 5 : 85 },
+    { subject: "Resource Sizing", A: 76 },
+    { subject: "Trend Analysis", A: 95 },
+    { subject: "Pattern Recognition", A: 84 },
+    { subject: "Forecasting", A: 90 },
+  ];
+
   return (
     <div className="space-y-5">
       <div>
@@ -40,20 +38,20 @@ const IntelligenceView = () => {
       {/* Model Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {[
-          { label: "Model Accuracy", value: "94.2%", sub: "↑ 2.1% this month", icon: Brain, color: "success" as const },
-          { label: "Predictions Made", value: "1,247", sub: "Last 30 days", icon: TrendingUp, color: "default" as const },
-          { label: "Anomalies Caught", value: "34", sub: "92% true positive rate", icon: AlertTriangle, color: "warning" as const },
-          { label: "Cost Savings ID'd", value: "$12.4k", sub: "From ML recommendations", icon: Target, color: "success" as const },
+          { label: "Model Accuracy", value: `${insights?.radarScore || 0}%`, sub: insights?.accuracyDesc || "Gathering...", icon: Brain, color: "success" as const },
+          { label: "Lambda Invocations", value: String(metrics?.lambdaInvocations24h || 0), sub: "Last 24 Hours", icon: TrendingUp, color: "default" as const },
+          { label: "Anomalies Caught", value: String(anomalies?.length || 0), sub: "Total Live cost spikes", icon: AlertTriangle, color: "warning" as const },
+          { label: "Cost Savings ID'd", value: "Real-time", sub: "Check optimization tab", icon: Target, color: "success" as const },
         ].map((s, i) => (
           <div key={i} className="rounded-lg border bg-card p-4 flex flex-col justify-between min-h-[110px]">
-            <div className="flex items-start justify-between">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{s.label}</span>
-              <s.icon className="h-4 w-4 text-muted-foreground/50" />
-            </div>
-            <div>
-              <div className="text-2xl font-bold tracking-tight text-foreground">{s.value}</div>
-              <p className={`text-xs mt-0.5 ${s.color === "success" ? "text-success" : s.color === "warning" ? "text-warning" : "text-muted-foreground"}`}>{s.sub}</p>
-            </div>
+             <div className="flex items-start justify-between">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{s.label}</span>
+                <s.icon className="h-4 w-4 text-muted-foreground/50" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold tracking-tight text-foreground">{s.value}</div>
+                <p className={`text-xs mt-0.5 ${s.color === "success" ? "text-success" : s.color === "warning" ? "text-warning" : "text-muted-foreground"}`}>{s.sub}</p>
+              </div>
           </div>
         ))}
       </div>
@@ -96,25 +94,22 @@ const IntelligenceView = () => {
 
       {/* AI Insights */}
       <div className="rounded-lg border bg-card p-5">
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground mb-4">AI-Generated Insights</h3>
+        <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground mb-4">Active Anomalies Detected</h3>
         <div className="space-y-2">
-          {insights.map((insight, i) => (
+          {(!anomalies || anomalies.length === 0) && (
+            <p className="text-sm text-muted-foreground p-3">No active anomalies detected by AWS Cost Explorer within the last week.</p>
+          )}
+          {(anomalies || []).map((anomaly: any, i: number) => (
             <div key={i} className="flex items-center justify-between p-3 rounded-lg bg-muted/40 hover:bg-muted/70 transition-colors">
               <div className="flex items-center gap-3">
-                {insight.trend === "up" ? (
-                  <ArrowUpRight className="h-4 w-4 text-destructive" />
-                ) : (
-                  <ArrowDownRight className="h-4 w-4 text-success" />
-                )}
-                <span className="text-sm text-foreground">{insight.title}</span>
+                <AlertTriangle className="h-4 w-4 text-warning" />
+                <span className="text-sm text-foreground">{anomaly.service} anomaly</span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-xs font-mono text-muted-foreground">{insight.confidence} confidence</span>
-                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${
-                  insight.impact === "high" ? "bg-destructive/10 text-destructive border-destructive/20" :
-                  insight.impact === "medium" ? "bg-warning/10 text-warning border-warning/20" :
-                  "bg-muted text-muted-foreground border-border"
-                }`}>{insight.impact}</span>
+                <span className="text-xs font-mono text-muted-foreground">${anomaly.impact} impact</span>
+                <span className="bg-warning/10 text-warning border-warning/20 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border">
+                  Score: {anomaly.score}
+                </span>
               </div>
             </div>
           ))}
