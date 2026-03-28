@@ -19,25 +19,25 @@ const statusStyles: Record<string, string> = {
 
 const ResourceTable = () => {
   return (
-    <div className="rounded-lg border bg-card p-5">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground">Top Resources by Cost</h3>
+    <div className="glass-card p-6 overflow-hidden">
+      <div className="flex items-center justify-between mb-6">
+        <h3 className="text-[11px] font-bold uppercase tracking-widest text-[#121212]">Top Resources by Cost</h3>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="text-xs">Filter</Button>
-          <Button variant="outline" size="sm" className="text-xs">Export CSV</Button>
+          <Button variant="outline" size="sm" className="text-[10px] font-bold uppercase tracking-widest bg-white/40 border-black/5 hover:bg-white/60 rounded-full px-4 h-8 transition-all">Filter</Button>
+          <Button variant="outline" size="sm" className="text-[10px] font-bold uppercase tracking-widest bg-white/40 border-black/5 hover:bg-white/60 rounded-full px-4 h-8 transition-all">Export CSV</Button>
         </div>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b">
-              <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-muted-foreground py-2 pr-4">Resource ID</th>
-              <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-muted-foreground py-2 pr-4">Type</th>
-              <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-muted-foreground py-2 pr-4">Region</th>
-              <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-muted-foreground py-2 pr-4">Est. Cost/Mo</th>
-              <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-muted-foreground py-2 pr-4">CPU Avg</th>
-              <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-muted-foreground py-2 pr-4">Score</th>
-              <th className="text-left text-[10px] font-semibold uppercase tracking-wider text-muted-foreground py-2">Status</th>
+            <tr className="border-b border-black/5">
+              <th className="text-left text-[11px] font-bold uppercase tracking-widest text-muted-foreground py-3 pr-4">Resource ID</th>
+              <th className="text-left text-[11px] font-bold uppercase tracking-widest text-muted-foreground py-3 pr-4">Type</th>
+              <th className="text-left text-[11px] font-bold uppercase tracking-widest text-muted-foreground py-3 pr-4">Region</th>
+              <th className="text-left text-[11px] font-bold uppercase tracking-widest text-muted-foreground py-3 pr-4">Est. Cost/Mo</th>
+              <th className="text-left text-[11px] font-bold uppercase tracking-widest text-muted-foreground py-3 pr-4">CPU Avg</th>
+              <th className="text-left text-[11px] font-bold uppercase tracking-widest text-muted-foreground py-3 pr-4">Score</th>
+              <th className="text-left text-[11px] font-bold uppercase tracking-widest text-muted-foreground py-3">Status</th>
             </tr>
           </thead>
           <tbody>

@@ -17,16 +17,18 @@ const subtextColors = {
 
 const StatCard = ({ label, value, subtext, subtextColor = "default", icon: Icon }: StatCardProps) => {
   return (
-    <div className="rounded-lg border bg-card p-4 flex flex-col justify-between min-h-[110px]">
+    <div className="glass-card p-5 flex flex-col justify-between min-h-[120px] group">
       <div className="flex items-start justify-between">
-        <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+        <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors">
           {label}
         </span>
-        <Icon className="h-4 w-4 text-muted-foreground/50" />
+        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+          <Icon className="h-4 w-4" />
+        </div>
       </div>
-      <div>
-        <div className="text-2xl font-bold tracking-tight text-foreground">{value}</div>
-        <p className={`text-xs mt-0.5 ${subtextColors[subtextColor]}`}>
+      <div className="mt-4">
+        <div className="text-3xl font-heading font-extrabold tracking-tight text-foreground">{value}</div>
+        <p className={`text-[11px] font-medium mt-1 ${subtextColors[subtextColor]}`}>
           {subtext}
         </p>
       </div>

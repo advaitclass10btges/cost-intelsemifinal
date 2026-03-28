@@ -1,96 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 80 20% 96%;
-    --foreground: 150 10% 15%;
+    --background: 130 16% 93%;
+    --foreground: 0 0% 7%;
 
-    --card: 80 15% 98%;
-    --card-foreground: 150 10% 15%;
+    /* Glass card variable */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
 
-    --popover: 80 15% 98%;
-    --popover-foreground: 150 10% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
 
-    --primary: 150 25% 30%;
-    --primary-foreground: 80 20% 96%;
+    --primary: 109 14% 64%;
+    --primary-foreground: 0 0% 7%;
 
-    --secondary: 80 10% 92%;
-    --secondary-foreground: 150 10% 20%;
+    --secondary: 131 16% 88%;
+    --secondary-foreground: 120 5% 35%;
 
-    --muted: 80 8% 90%;
-    --muted-foreground: 150 5% 45%;
+    --muted: 131 16% 88%;
+    --muted-foreground: 120 5% 42%;
 
-    --accent: 150 20% 40%;
-    --accent-foreground: 80 20% 96%;
+    --accent: 109 14% 64%;
+    --accent-foreground: 0 0% 7%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 0 71% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 142 60% 40%;
+    --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
 
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
 
-    --border: 80 10% 88%;
-    --input: 80 10% 88%;
-    --ring: 150 25% 30%;
+    --border: 0 0% 0%; 
+    --input: 131 16% 88%;
+    --ring: 109 14% 64%;
 
-    --radius: 0.5rem;
+    --radius: 1.25rem;
 
-    --chart-green: 150 40% 45%;
-    --chart-green-light: 150 30% 75%;
-    --chart-amber: 38 92% 50%;
-    --chart-red: 0 72% 51%;
-    --chart-blue: 210 60% 50%;
-
-    --sidebar-background: 80 15% 97%;
-    --sidebar-foreground: 150 10% 25%;
-    --sidebar-primary: 150 25% 30%;
-    --sidebar-primary-foreground: 80 20% 96%;
-    --sidebar-accent: 80 10% 93%;
-    --sidebar-accent-foreground: 150 10% 20%;
-    --sidebar-border: 80 10% 88%;
-    --sidebar-ring: 150 25% 30%;
-
-    --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
-    --font-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+    --sidebar-background: 131 16% 88%;
+    --sidebar-foreground: 0 0% 7%;
+    --sidebar-primary: 109 14% 64%;
+    --sidebar-primary-foreground: 0 0% 7%;
+    --sidebar-accent: 130 16% 93%;
+    --sidebar-accent-foreground: 0 0% 7%;
+    --sidebar-border: 120 5% 80%;
+    --sidebar-ring: 109 14% 64%;
   }
 
   .dark {
+    /* Muted colors for dark if needed, but primary is glass */
     --background: 150 10% 8%;
     --foreground: 80 10% 90%;
-    --card: 150 10% 10%;
-    --card-foreground: 80 10% 90%;
-    --popover: 150 10% 10%;
-    --popover-foreground: 80 10% 90%;
-    --primary: 150 30% 55%;
-    --primary-foreground: 150 10% 8%;
-    --secondary: 150 8% 15%;
-    --secondary-foreground: 80 10% 85%;
-    --muted: 150 8% 18%;
-    --muted-foreground: 80 5% 55%;
-    --accent: 150 25% 45%;
-    --accent-foreground: 150 10% 8%;
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 150 8% 18%;
-    --input: 150 8% 18%;
-    --ring: 150 30% 55%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-black/5;
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply font-sans antialiased text-[#121212];
+    background-color: #e9efea;
+    background-image: linear-gradient(135deg, #e9efea 0%, #a4c0a4 100%);
+    background-attachment: fixed;
+  }
+  
+  .glass-card {
+    @apply bg-white/60 backdrop-blur-md rounded-[1.25rem] border border-black/5 shadow-[0_8px_32px_-8px_rgba(155,176,150,0.15)] transition-all duration-300 hover:scale-[1.01] hover:shadow-lg;
   }
 }
 

@@ -27,9 +27,9 @@ const PlatformView = () => {
 
   return (
     <div className="space-y-5">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Platform</h1>
-        <p className="text-xs uppercase tracking-widest text-muted-foreground mt-1">
+      <div className="mb-6">
+        <h1 className="font-heading text-4xl font-extrabold tracking-tighter text-foreground uppercase">Platform</h1>
+        <p className="text-xs uppercase tracking-widest text-[#667066] mt-1 font-semibold">
           Integrations · Configuration · Settings
         </p>
       </div>
@@ -41,17 +41,17 @@ const PlatformView = () => {
           { label: "Active Regions", value: platformStat ? String(platformStat.regions?.length || 0) : "...", sub: platformStat?.regions?.join(', ') || '' },
           { label: "Uptime", value: "99.99%", sub: "Live metrics" },
         ].map((s, i) => (
-          <div key={i} className="rounded-lg border bg-card p-4">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{s.label}</span>
-            <div className="text-2xl font-bold tracking-tight text-foreground mt-1">{s.value}</div>
-            <p className="text-xs text-muted-foreground mt-0.5">{s.sub}</p>
+          <div key={i} className="glass-card p-5 group">
+            <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors">{s.label}</span>
+            <div className="text-3xl font-heading font-extrabold tracking-tight text-foreground mt-2">{s.value}</div>
+            <p className="text-[11px] font-medium text-muted-foreground mt-1">{s.sub}</p>
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-        <div className="rounded-lg border bg-card p-5">
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground mb-4">Integrations</h3>
+        <div className="glass-card p-5">
+          <h3 className="text-[11px] font-bold uppercase tracking-widest text-foreground mb-4">Integrations</h3>
           <div className="space-y-2">
             {integrations.length === 0 && <p className="text-sm text-muted-foreground p-3">Loading connections...</p>}
             {integrations.map((int: any, i: number) => (
@@ -87,8 +87,8 @@ const PlatformView = () => {
           </div>
         </div>
 
-        <div className="rounded-lg border bg-card p-5">
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground mb-4">Settings</h3>
+        <div className="glass-card p-5">
+          <h3 className="text-[11px] font-bold uppercase tracking-widest text-foreground mb-4">Settings</h3>
           <div className="space-y-2">
             <div className="p-3 mb-2 bg-muted/20 border rounded-lg">
                 <p className="text-xs font-mono break-all text-muted-foreground">Logged as: {platformStat?.arn || '...'}</p>

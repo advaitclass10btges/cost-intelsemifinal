@@ -13,11 +13,11 @@ const data = [
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (!active || !payload) return null;
   return (
-    <div className="rounded-lg border bg-card p-3 shadow-lg">
-      <p className="text-xs font-semibold text-foreground mb-1">{label}</p>
+    <div className="glass-card p-3 shadow-xl border-white/40">
+      <p className="text-[11px] font-bold text-foreground mb-1 uppercase tracking-tight">{label}</p>
       {payload.map((entry: any, i: number) => (
-        <p key={i} className="text-xs text-muted-foreground">
-          {entry.name}: <span className="font-mono font-medium text-foreground">${entry.value.toLocaleString()}</span>
+        <p key={i} className="text-[11px] font-medium text-muted-foreground">
+          {entry.name}: <span className="font-mono text-foreground">${entry.value.toLocaleString()}</span>
         </p>
       ))}
     </div>
@@ -26,7 +26,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 const CostAnalyticsChart = () => {
   return (
-    <div className="rounded-lg border bg-card p-5">
+    <div className="glass-card p-5">
       <div className="mb-4">
         <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground">Cost Analytics</h3>
         <p className="text-xs text-muted-foreground mt-0.5">7-day cloud spend vs forecast</p>

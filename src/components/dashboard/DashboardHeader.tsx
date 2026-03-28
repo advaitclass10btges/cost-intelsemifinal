@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Zap, LogOut } from "lucide-react";
 
 const navItems = ["Dashboard", "Intelligence", "Optimization", "Execution", "Platform"];
@@ -9,26 +9,33 @@ interface DashboardHeaderProps {
 }
 
 const DashboardHeader = ({ activeTab, onTabChange }: DashboardHeaderProps) => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 border-b bg-card/80 backdrop-blur-sm">
-      <div className="flex items-center justify-between px-6 py-3">
-        <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground text-sm font-bold">
-            CI
+    <header className={`sticky top-4 z-50 mx-auto max-w-5xl transition-all duration-300 ${scrolled ? 'px-4' : 'px-6'}`}>
+      <div className="glass-card flex items-center justify-between px-6 py-3 shadow-lg">
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/20 text-primary font-heading font-extrabold text-sm tracking-tighter">
+            SS
           </div>
-          <span className="font-semibold text-foreground">CostIntel</span>
-          <span className="text-xs text-muted-foreground font-mono">v2.4.1</span>
+          <span className="font-heading font-extrabold tracking-tight text-foreground uppercase text-lg">Sage Stream</span>
         </div>
 
-        <nav className="flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-1 p-1 bg-black/5 rounded-full">
           {navItems.map((item) => (
             <button
               key={item}
               onClick={() => onTabChange(item)}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase transition-colors ${
+              className={`px-5 py-2 rounded-full text-[11px] font-bold tracking-widest uppercase transition-all duration-300 ${
                 activeTab === item
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                  ? "bg-primary text-white shadow-md shadow-primary/20 scale-105"
+                  : "text-muted-foreground hover:text-foreground hover:bg-black/5"
               }`}
             >
               {item}
@@ -36,7 +43,7 @@ const DashboardHeader = ({ activeTab, onTabChange }: DashboardHeaderProps) => {
           ))}
         </nav>
 
-        <button className="p-2 text-muted-foreground hover:text-foreground transition-colors">
+        <button className="flex items-center justify-center h-9 w-9 rounded-full bg-black/5 text-muted-foreground hover:bg-black/10 hover:text-foreground transition-all">
           <LogOut className="h-4 w-4" />
         </button>
       </div>

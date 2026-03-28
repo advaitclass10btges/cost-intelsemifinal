@@ -14,7 +14,7 @@ const severityBorder: Record<string, string> = {
 
 const RecentAnomalies = () => {
   return (
-    <div className="rounded-lg border bg-card p-5 h-full flex flex-col">
+    <div className="glass-card p-5 h-full flex flex-col">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground">Recent Anomalies</h3>
         <span className="text-[10px] font-bold uppercase tracking-wider bg-destructive/10 text-destructive px-2 py-0.5 rounded-full">

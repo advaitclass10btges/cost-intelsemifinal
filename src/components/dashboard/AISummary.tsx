@@ -7,18 +7,18 @@ const stats = [
 
 const AISummary = () => {
   return (
-    <div className="rounded-lg border bg-card p-5">
-      <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground mb-4">
+    <div className="glass-card p-6">
+      <h3 className="text-[11px] font-bold uppercase tracking-widest text-[#121212] mb-6">
         Automated Intelligence Summary
       </h3>
       <div className="grid grid-cols-2 gap-3">
         {stats.map((stat, i) => (
           <div
             key={i}
-            className="rounded-lg bg-muted/50 p-4 text-center"
+            className="rounded-2xl bg-white/40 p-5 text-center shadow-inner border border-white/50"
           >
-            <div className="text-xl font-bold text-foreground">{stat.value}</div>
-            <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mt-1">
+            <div className="text-2xl font-heading font-extrabold text-[#121212] tracking-tighter">{stat.value}</div>
+            <div className="text-[10px] font-bold uppercase tracking-widest text-[#667066] mt-1">
               {stat.label}
             </div>
           </div>

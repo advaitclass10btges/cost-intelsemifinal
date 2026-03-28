@@ -50,9 +50,9 @@ const OptimizationView = () => {
 
   return (
     <div className="space-y-5">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Optimization</h1>
-        <p className="text-xs uppercase tracking-widest text-muted-foreground mt-1">
+      <div className="mb-6">
+        <h1 className="font-heading text-4xl font-extrabold tracking-tighter text-foreground uppercase">Optimization</h1>
+        <p className="text-xs uppercase tracking-widest text-[#667066] mt-1 font-semibold">
           Cost Reduction · Rightsizing · Recommendations
         </p>
       </div>
@@ -64,22 +64,24 @@ const OptimizationView = () => {
           { label: "Resources to Optimize", value: String(allRecommendations.length), sub: "Automated review", icon: Layers, color: "warning" as const },
           { label: "Avg CPU Utilization", value: "Unknown", sub: "Enable CW metrics", icon: Cpu, color: "default" as const },
         ].map((s, i) => (
-          <div key={i} className="rounded-lg border bg-card p-4 flex flex-col justify-between min-h-[110px]">
+          <div key={i} className="glass-card p-5 flex flex-col justify-between min-h-[120px] group">
             <div className="flex items-start justify-between">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{s.label}</span>
-              <s.icon className="h-4 w-4 text-muted-foreground/50" />
+              <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors">{s.label}</span>
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+                <s.icon className="h-4 w-4" />
+              </div>
             </div>
-            <div>
-              <div className="text-2xl font-bold tracking-tight text-foreground">{s.value}</div>
-              <p className={`text-xs mt-0.5 ${s.color === "success" ? "text-success" : s.color === "warning" ? "text-warning" : "text-muted-foreground"}`}>{s.sub}</p>
+            <div className="mt-4">
+              <div className="text-3xl font-heading font-extrabold tracking-tight text-foreground">{s.value}</div>
+              <p className={`text-[11px] font-medium mt-1 ${s.color === "success" ? "text-success" : s.color === "warning" ? "text-warning" : "text-muted-foreground"}`}>{s.sub}</p>
             </div>
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-        <div className="rounded-lg border bg-card p-5">
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground mb-4">Savings by Category</h3>
+        <div className="glass-card p-5">
+          <h3 className="text-[11px] font-bold uppercase tracking-widest text-foreground mb-4">Savings by Category</h3>
           <ResponsiveContainer width="100%" height={260}>
             <BarChart data={savingsData} layout="vertical" margin={{ top: 0, right: 5, left: 10, bottom: 0 }}>
               <XAxis type="number" tick={{ fontSize: 10, fill: "hsl(150, 5%, 45%)" }} tickLine={false} axisLine={false} tickFormatter={(v) => `$${v}`} />
@@ -91,8 +93,8 @@ const OptimizationView = () => {
           </ResponsiveContainer>
         </div>
 
-        <div className="rounded-lg border bg-card p-5">
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground mb-4">Quick Wins</h3>
+        <div className="glass-card p-5">
+          <h3 className="text-[11px] font-bold uppercase tracking-widest text-foreground mb-4">Quick Wins</h3>
           <div className="space-y-3">
             {allRecommendations.slice(0, 4).map((r, i) => (
               <div key={i} className="flex items-center justify-between p-3 rounded-lg bg-muted/40 hover:bg-muted/70 transition-colors cursor-pointer group">
@@ -112,8 +114,8 @@ const OptimizationView = () => {
       </div>
 
       {/* Full Recommendations Table */}
-      <div className="rounded-lg border bg-card p-5">
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground mb-4">All Recommendations</h3>
+      <div className="glass-card p-5">
+        <h3 className="text-[11px] font-bold uppercase tracking-widest text-foreground mb-4">All Recommendations</h3>
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b">

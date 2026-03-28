@@ -18,9 +18,9 @@ const DashboardView = () => {
   return (
     <div className="space-y-5">
       {/* Page Title */}
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Dashboard</h1>
-        <p className="text-xs uppercase tracking-widest text-muted-foreground mt-1">
+      <div className="mb-6">
+        <h1 className="font-heading text-4xl font-extrabold tracking-tighter text-foreground uppercase">Dashboard</h1>
+        <p className="text-xs uppercase tracking-widest text-[#667066] mt-1 font-semibold">
           Autonomous FinOps · AWS ONLY · Real-Time
         </p>
       </div>

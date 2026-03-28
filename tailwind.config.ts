@@ -14,7 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["'IBM Plex Sans'", "system-ui", "-apple-system", "sans-serif"],
+        heading: ["Montserrat", "sans-serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
         mono: ["'IBM Plex Mono'", "'SF Mono'", "monospace"],
       },
       colors: {

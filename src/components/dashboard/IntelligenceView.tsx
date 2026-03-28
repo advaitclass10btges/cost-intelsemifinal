@@ -28,9 +28,9 @@ const IntelligenceView = () => {
 
   return (
     <div className="space-y-5">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Intelligence</h1>
-        <p className="text-xs uppercase tracking-widest text-muted-foreground mt-1">
+      <div className="mb-6">
+        <h1 className="font-heading text-4xl font-extrabold tracking-tighter text-foreground uppercase">Intelligence</h1>
+        <p className="text-xs uppercase tracking-widest text-[#667066] mt-1 font-semibold">
           ML Models · Predictions · Insights
         </p>
       </div>
@@ -43,14 +43,16 @@ const IntelligenceView = () => {
           { label: "Anomalies Caught", value: String(anomalies?.length || 0), sub: "Total Live cost spikes", icon: AlertTriangle, color: "warning" as const },
           { label: "Cost Savings ID'd", value: "Real-time", sub: "Check optimization tab", icon: Target, color: "success" as const },
         ].map((s, i) => (
-          <div key={i} className="rounded-lg border bg-card p-4 flex flex-col justify-between min-h-[110px]">
+          <div key={i} className="glass-card p-5 flex flex-col justify-between min-h-[120px] group">
              <div className="flex items-start justify-between">
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{s.label}</span>
-                <s.icon className="h-4 w-4 text-muted-foreground/50" />
+                <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors">{s.label}</span>
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+                  <s.icon className="h-4 w-4" />
+                </div>
               </div>
-              <div>
-                <div className="text-2xl font-bold tracking-tight text-foreground">{s.value}</div>
-                <p className={`text-xs mt-0.5 ${s.color === "success" ? "text-success" : s.color === "warning" ? "text-warning" : "text-muted-foreground"}`}>{s.sub}</p>
+              <div className="mt-4">
+                <div className="text-3xl font-heading font-extrabold tracking-tight text-foreground">{s.value}</div>
+                <p className={`text-[11px] font-medium mt-1 ${s.color === "success" ? "text-success" : s.color === "warning" ? "text-warning" : "text-muted-foreground"}`}>{s.sub}</p>
               </div>
           </div>
         ))}
@@ -58,8 +60,8 @@ const IntelligenceView = () => {
 
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-        <div className="rounded-lg border bg-card p-5">
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground mb-4">Model Performance Trend</h3>
+        <div className="glass-card p-5">
+          <h3 className="text-[11px] font-bold uppercase tracking-widest text-foreground mb-4">Model Performance Trend</h3>
           <ResponsiveContainer width="100%" height={280}>
             <AreaChart data={modelPerformance} margin={{ top: 5, right: 5, left: -10, bottom: 0 }}>
               <defs>
@@ -79,8 +81,8 @@ const IntelligenceView = () => {
           </ResponsiveContainer>
         </div>
 
-        <div className="rounded-lg border bg-card p-5">
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground mb-4">Capability Radar</h3>
+        <div className="glass-card p-5">
+          <h3 className="text-[11px] font-bold uppercase tracking-widest text-foreground mb-4">Capability Radar</h3>
           <ResponsiveContainer width="100%" height={280}>
             <RadarChart data={radarData} outerRadius="70%">
               <PolarGrid stroke="hsl(80, 10%, 88%)" />
@@ -93,8 +95,8 @@ const IntelligenceView = () => {
       </div>
 
       {/* AI Insights */}
-      <div className="rounded-lg border bg-card p-5">
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground mb-4">Active Anomalies Detected</h3>
+      <div className="glass-card p-5">
+        <h3 className="text-[11px] font-bold uppercase tracking-widest text-foreground mb-4">Active Anomalies Detected</h3>
         <div className="space-y-2">
           {(!anomalies || anomalies.length === 0) && (
             <p className="text-sm text-muted-foreground p-3">No active anomalies detected by AWS Cost Explorer within the last week.</p>

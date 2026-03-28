@@ -11,15 +11,15 @@ const steps = [
 
 const PipelineStatus = () => {
   return (
-    <div className="rounded-lg border bg-card p-5">
+    <div className="glass-card p-6">
       <div className="flex items-center justify-between mb-1">
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground">Pipeline Status</h3>
-        <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-success animate-pulse" />
-          <span className="text-xs font-semibold text-success">Running</span>
+        <h3 className="text-[11px] font-bold uppercase tracking-widest text-[#121212]">Pipeline Status</h3>
+        <div className="flex items-center gap-2 px-2 py-1 rounded-full bg-emerald-500/10 active:scale-95 transition-all">
+          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">Active</span>
         </div>
       </div>
-      <p className="text-xs text-muted-foreground mb-4 font-mono">Last run: 2m 14s ago</p>
+      <p className="text-[10px] uppercase font-bold tracking-widest text-[#667066] mb-6">Last run: 2m 14s ago</p>
       <div className="space-y-3">
         {steps.map((step, i) => (
           <div key={i} className="flex items-center justify-between">
