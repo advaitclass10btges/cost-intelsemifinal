@@ -26,7 +26,7 @@ const PlatformView = () => {
   })) : [];
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-8">
       <div className="mb-6">
         <h1 className="font-heading text-4xl font-extrabold tracking-tighter text-foreground uppercase">Platform</h1>
         <p className="text-xs uppercase tracking-widest text-[#667066] mt-1 font-semibold">
@@ -34,7 +34,7 @@ const PlatformView = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
           { label: "Connected Accounts", value: accounts ? String(accounts.length) : "...", sub: "AWS ONLY" },
           { label: "Total Resources", value: platformStat ? String(platformStat.totalResources) : "...", sub: "Live scanned" },
@@ -49,7 +49,7 @@ const PlatformView = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="glass-card p-5">
           <h3 className="text-[11px] font-bold uppercase tracking-widest text-foreground mb-4">Integrations</h3>
           <div className="space-y-2">

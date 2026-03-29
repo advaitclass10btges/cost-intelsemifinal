@@ -33,7 +33,7 @@ const ExecutionView = () => {
   };
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-8">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="font-heading text-4xl font-extrabold tracking-tighter text-foreground uppercase">Execution</h1>
@@ -43,7 +43,7 @@ const ExecutionView = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
           { label: "Total Actions Taken", value: String(history.length), sub: "Since server boot" },
           { label: "In Progress", value: String(history.filter((h: any) => h.status === 'RUNNING').length), sub: "Executing now" },
@@ -58,7 +58,7 @@ const ExecutionView = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="glass-card p-5">
             <h3 className="text-[11px] font-bold uppercase tracking-widest text-foreground mb-5">Live Playbooks (Test Resources)</h3>
             <div className="space-y-2">

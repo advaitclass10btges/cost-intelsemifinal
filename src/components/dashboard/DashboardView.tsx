@@ -16,7 +16,7 @@ const DashboardView = () => {
   const { data: platformStat } = useQuery({ queryKey: ['platStat'], queryFn: fetchPlatformStatus, refetchInterval: 60000 });
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-8">
       {/* Page Title */}
       <div className="mb-6">
         <h1 className="font-heading text-4xl font-extrabold tracking-tighter text-foreground uppercase">Dashboard</h1>
@@ -26,7 +26,7 @@ const DashboardView = () => {
       </div>
 
       {/* Top Stats Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard 
           label="Monthly Spend" 
           value={monthlyCost ? `$${monthlyCost.total}` : "..."} 
@@ -58,7 +58,7 @@ const DashboardView = () => {
       </div>
 
       {/* Second Stats Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard label="AI Actions Today" value="0" subtext="No automation enabled" icon={Zap} />
         <StatCard 
           label="Resources Monitored" 
@@ -71,7 +71,7 @@ const DashboardView = () => {
       </div>
 
       {/* Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         <div className="lg:col-span-3">
           <CostAnalyticsChart />
         </div>
@@ -81,7 +81,7 @@ const DashboardView = () => {
       </div>
 
       {/* Bottom Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <ServiceCostBreakdown />
         <PipelineStatus />
         <AISummary />

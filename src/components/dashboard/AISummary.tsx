@@ -7,7 +7,7 @@ const stats = [
 
 const AISummary = () => {
   return (
-    <div className="glass-card p-6">
+    <div className="glass-card p-8">
       <h3 className="text-[11px] font-bold uppercase tracking-widest text-[#121212] mb-6">
         Automated Intelligence Summary
       </h3>

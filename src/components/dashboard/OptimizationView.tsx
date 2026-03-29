@@ -49,7 +49,7 @@ const OptimizationView = () => {
   ];
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-8">
       <div className="mb-6">
         <h1 className="font-heading text-4xl font-extrabold tracking-tighter text-foreground uppercase">Optimization</h1>
         <p className="text-xs uppercase tracking-widest text-[#667066] mt-1 font-semibold">
@@ -57,7 +57,7 @@ const OptimizationView = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
           { label: "Total Savings Potential", value: `$${savingsData.reduce((a, b) => a + b.potential, 0).toFixed(2)}/mo`, sub: `Across ${allRecommendations.length} recommendations`, icon: TrendingDown, color: "success" as const },
           { label: "Realized Savings", value: "$0.00/mo", sub: "Setup Execution tracking", icon: Gauge, color: "success" as const },
@@ -79,7 +79,7 @@ const OptimizationView = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="glass-card p-5">
           <h3 className="text-[11px] font-bold uppercase tracking-widest text-foreground mb-4">Savings by Category</h3>
           <ResponsiveContainer width="100%" height={260}>

@@ -11,7 +11,7 @@ const steps = [
 
 const PipelineStatus = () => {
   return (
-    <div className="glass-card p-6">
+    <div className="glass-card p-8">
       <div className="flex items-center justify-between mb-1">
         <h3 className="text-[11px] font-bold uppercase tracking-widest text-[#121212]">Pipeline Status</h3>
         <div className="flex items-center gap-2 px-2 py-1 rounded-full bg-emerald-500/10 active:scale-95 transition-all">

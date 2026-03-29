@@ -17,7 +17,7 @@ const subtextColors = {
 
 const StatCard = ({ label, value, subtext, subtextColor = "default", icon: Icon }: StatCardProps) => {
   return (
-    <div className="glass-card p-5 flex flex-col justify-between min-h-[120px] group">
+    <div className="glass-card p-6 flex flex-col justify-between min-h-[140px] group transition-all duration-300">
       <div className="flex items-start justify-between">
         <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground transition-colors">
           {label}

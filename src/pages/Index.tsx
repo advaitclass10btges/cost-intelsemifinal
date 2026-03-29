@@ -20,12 +20,15 @@ const Index = () => {
   const ActiveView = views[activeTab] || DashboardView;
 
   return (
-    <div className="min-h-screen bg-transparent">
+    <div className="min-h-screen bg-transparent pb-20">
       <DashboardHeader activeTab={activeTab} onTabChange={setActiveTab} />
-      <div className="max-w-[1400px] mx-auto pt-4 px-6 mb-4">
+      
+      {/* Alert Ticker with more vertical breathing room */}
+      <div className="max-w-[1400px] mx-auto pt-10 px-6 mb-10">
         <AlertTicker />
       </div>
-      <main className="p-6 pt-2 max-w-[1400px] mx-auto pb-20">
+
+      <main className="px-6 max-w-[1400px] mx-auto">
         <ActiveView />
       </main>
     </div>
