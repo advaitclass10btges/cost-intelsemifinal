@@ -1,3 +1,7 @@
+import path from 'path';
+import dotenv from 'dotenv';
+dotenv.config({ path: path.join(__dirname, '.env') });
+
 import { CostExplorerClient } from "@aws-sdk/client-cost-explorer";
 import { CloudWatchClient } from "@aws-sdk/client-cloudwatch";
 import { EC2Client } from "@aws-sdk/client-ec2";

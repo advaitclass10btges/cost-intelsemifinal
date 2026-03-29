@@ -68,6 +68,11 @@
     background-color: #e9efea;
     background-image: linear-gradient(135deg, #e9efea 0%, #a4c0a4 100%);
     background-attachment: fixed;
+    cursor: none; /* Hide default cursor */
+  }
+
+  a, button, [role="button"] {
+    cursor: none !important; /* Hide on interactive elements */
   }
   
   .glass-card {
@@ -79,4 +84,17 @@
   .font-mono {
     font-family: var(--font-mono);
   }
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-ticker {
+  animation: ticker 40s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
 }

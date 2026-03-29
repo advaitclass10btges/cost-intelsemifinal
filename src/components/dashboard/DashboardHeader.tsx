@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Zap, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
+import { AlertPanel } from "./AlertPanel";
 
 const navItems = ["Dashboard", "Intelligence", "Optimization", "Execution", "Platform"];
 
@@ -43,9 +44,12 @@ const DashboardHeader = ({ activeTab, onTabChange }: DashboardHeaderProps) => {
           ))}
         </nav>
 
-        <button className="flex items-center justify-center h-9 w-9 rounded-full bg-black/5 text-muted-foreground hover:bg-black/10 hover:text-foreground transition-all">
-          <LogOut className="h-4 w-4" />
-        </button>
+        <div className="flex items-center gap-4">
+          <AlertPanel />
+          <button className="flex items-center justify-center h-9 w-9 rounded-full bg-black/5 text-muted-foreground hover:bg-black/10 hover:text-foreground transition-all">
+            <LogOut className="h-4 w-4" />
+          </button>
+        </div>
       </div>
     </header>
   );

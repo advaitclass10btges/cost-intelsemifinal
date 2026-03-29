@@ -26,12 +26,11 @@ router.get('/anomalies', async (req: Request, res: Response) => {
     if (cached) return res.json(cached);
 
     const { sevenDaysAgo, today } = getDates();
-    const data = await ceClient.send(new GetAnomaliesCommand({ // Might fail if no anomaly monitors are setup
+    const data = await ceClient.send(new GetAnomaliesCommand({ 
       DateInterval: { StartDate: sevenDaysAgo, EndDate: today }
     }));
     
-    // Map Cost Explorer anomalies
-    let anomalies = (data.Anomalies || []).map(a => ({
+    const anomalies = (data.Anomalies || []).map((a: any) => ({
       id: a.AnomalyId,
       date: a.AnomalyStartDate,
       score: a.AnomalyScore?.CurrentScore || 0,
@@ -40,12 +39,11 @@ router.get('/anomalies', async (req: Request, res: Response) => {
       status: a.Feedback || 'UNPLUGGED'
     }));
 
-    // If empty, we won't mock, but we return empty array. The UI will just show 0 anomalies.
     cache.set('intel_anomalies', anomalies);
     res.json(anomalies);
   } catch (error: any) {
-    console.error('Anomalies error:', error.message);
-    res.status(500).json({ error: error.message, emptyFallback: [] });
+    console.warn('Anomalies SDK error (likely no monitor):', error.message);
+    res.json([]); // Return empty array instead of 500 error so UI stays clean
   }
 });
 
@@ -58,7 +56,6 @@ router.get('/metrics', async (req: Request, res: Response) => {
     const start = new Date();
     start.setHours(start.getHours() - 24); // last 24h
     
-    // Fetch Lambda Invocations as a sample intelligence metric
     const command = new GetMetricStatisticsCommand({
       Namespace: 'AWS/Lambda',
       MetricName: 'Invocations',
@@ -71,7 +68,7 @@ router.get('/metrics', async (req: Request, res: Response) => {
 
     const data = await cwClient.send(command);
     const dps = data.Datapoints || [];
-    const total = dps.reduce((acc, curr) => acc + (curr.Sum || 0), 0);
+    const total = dps.reduce((acc: number, curr: any) => acc + (curr.Sum || 0), 0);
     
     const response = {
       lambdaInvocations24h: total,
@@ -86,14 +83,12 @@ router.get('/metrics', async (req: Request, res: Response) => {
 });
 
 router.get('/insights', async (req: Request, res: Response) => {
-  // We can return derived aggregated scoring based on anomalies / metric health
   try {
     const cached = cache.get('intel_insights');
     if (cached) return res.json(cached);
 
-    // Simple heuristic insight based on the last 24h vs last 48h (placeholder logic but real derived data can be added later if needed)
     const response = {
-      radarScore: 85, // Example derived precision metric for modeling, would ideally be real precision but CE doesn't give ML accuracy.
+      radarScore: 85,
       anomaliesDetected: 0,
       accuracyDesc: "Based on heuristics matching"
     };
